@@ -7,6 +7,19 @@ public class UIManagerScene1 : MonoBehaviour
 {
     public TMP_InputField InputField;
 
+    private string existingUsername;
+
+    private const string USERNAME = "USERNAME";
+
+    private void Start()
+    {
+        existingUsername = PlayerPrefs.GetString(USERNAME);
+        if (existingUsername !="")
+        {
+            InputField.placeholder.GetComponent<TextMeshProUGUI>().text = existingUsername;
+        }
+    }
+
     public void Saveusername()
     {
         string inputText = InputField.text;
@@ -20,5 +33,9 @@ public class UIManagerScene1 : MonoBehaviour
         {
             DataPersistence.sharedInstance.username = inputText;
         }
+    }
+    public void SaveUserNameWithPlayerPrefs()
+    {
+        PlayerPrefs.SetString("USERNAME",DataPersistence.sharedInstance.username);
     }
 }
